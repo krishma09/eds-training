@@ -17,7 +17,7 @@
 }
 
 .cards .cards-card-image {
-    line-height: 0;
+    line-height: 0px;
 }
 
 .cards > ul > li img {
