@@ -246,6 +246,12 @@
             "value": "teaser-disclaimer-right"
           }
         ]
+      },
+      {
+        "component": "boolean",
+        "label": "Boolean",
+        "name": "classes_changeA",
+        "valueType": "boolean"
       }
     ]
   },
