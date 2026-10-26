@@ -207,6 +207,13 @@
         "valueType": "string"
       },
       {
+        "component": "richtext",
+        "name": "text1",
+        "value": "",
+        "label": "Text 1",
+        "valueType": "string"
+      },
+      {
         "component": "aem-content",
         "name": "Link",
         "label": "Link"
