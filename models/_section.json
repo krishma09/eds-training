@@ -52,7 +52,8 @@
         "columns",
         "fragment",
         "dummy-text",
-        "teaser"
+        "teaser",
+        "feature"
       ]
     }
   ]
