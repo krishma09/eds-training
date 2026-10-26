@@ -21,9 +21,22 @@
       "id": "feature",
       "fields": [
         {
+          "component": "tab",
+          "label": "General",
+          "name": "tab1"
+        },
+        {
           "component": "reference",
-          "name": "Image",
-          "label": "Image"
+          "name": "backgroundImage",
+          "label": "Background Image",
+          "description": "Background image for the teaser",
+          "required": true
+        },
+        {
+          "component": "text",
+          "name": "backgroundImageAlt",
+          "label": "Background Image Alt",
+          "description": "Alt text for the background image"
         },
         {
           "component": "richtext",
@@ -46,21 +59,17 @@
         },
         {
           "component": "select",
-          "name": "Select",
-          "label": "Select any option",
+          "name": "classes_disclaimerPosition",
+          "label": "Disclaimer Position",
           "valueType": "string",
           "options": [
             {
-              "name": "Opt1",
-              "value": "opt1"
+              "name": "Left",
+              "value": "teaser-disclaimer-left"
             },
             {
-              "name": "Opt2",
-              "value": "opt2"
-            },
-            {
-              "name": "Opt3",
-              "value": "opt3"
+              "name": "Right",
+              "value": "teaser-disclaimer-right"
             }
           ]
         }
