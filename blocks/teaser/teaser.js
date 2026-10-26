@@ -1,40 +1,119 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
-import { moveInstrumentation } from '../../scripts/scripts.js';
+/* eslint-disable no-console */
+/* eslint-disable indent */
 
-export default function decorate(block) {
-  // The model gives us 4 rows, in model order:
-  // 1. image (+ imageAlt), 2. eyebrow, 3. text, 4. link (+ linkText)
-  const [imageRow, eyebrowRow, textRow, ctaRow] = [...block.children];
+function getTextContent(block, index) {
+  const content = block.children[index]?.querySelector('div');
+  return content ? content.textContent.trim() : '';
+}
 
-  // 1. Name each row with a class. We add classes instead of rebuilding,
-  //    so the Universal Editor attributes (data-aue-*) stay in place.
-  imageRow?.classList.add('teaser-image');
-  eyebrowRow?.classList.add('teaser-eyebrow');
-  textRow?.classList.add('teaser-text');
-  ctaRow?.classList.add('teaser-cta');
+function getRichTextContent(block, index) {
+  const content = block.children[index]?.querySelector('div');
+  if (!content) return '';
+  const p = content.querySelector('p');
+  return p ? p.innerHTML.trim() : content.innerHTML.trim();
+}
 
-  // 2. Swap the image for an optimized one (WebP, right size),
-  //    and copy the editor attributes onto the new <img>.
-  const img = imageRow?.querySelector('img');
-  if (img) {
-    const picture = createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }]);
-    moveInstrumentation(img, picture.querySelector('img'));
-    img.closest('picture').replaceWith(picture);
+function getPicture(block, index) {
+  const row = block.children[index];
+  return row?.querySelector('picture') || null;
+}
+
+function getLink(block, index) {
+  const row = block.children[index];
+  return row?.querySelector('a')?.href || '';
+}
+
+function extractConfig(block) {
+  if (!block) return {};
+
+  return {
+    id: getTextContent(block, 0),
+    backgroundImage: getPicture(block, 1),
+    title: getRichTextContent(block, 2),
+    subtitle: getRichTextContent(block, 3),
+    description: getRichTextContent(block, 4),
+    disclaimer: getRichTextContent(block, 5),
+    primaryCtaContent: getRichTextContent(block, 6),
+    primaryCtaLink: getLink(block, 7),
+  };
+}
+
+function buildTeaser(block, config) {
+  const {
+    id,
+    backgroundImage,
+    backgroundImageAlt,
+    title,
+    subtitle,
+    description,
+    disclaimer,
+    primaryCtaContent,
+    primaryCtaLink,
+  } = config;
+
+  if (id) block.id = id;
+
+  // Background image
+  const imageWrapper = document.createElement('div');
+  imageWrapper.className = 'teaser-background';
+  if (backgroundImage) {
+    const img = backgroundImage.querySelector('img');
+    if (img && backgroundImageAlt) img.alt = backgroundImageAlt;
+    imageWrapper.appendChild(backgroundImage);
   }
 
-  // 3. Style the link as a button (uses the boilerplate's button styles).
-  ctaRow?.querySelector('a')?.classList.add('button', 'primary');
+  // Content wrapper
+  const contentWrapper = document.createElement('div');
+  contentWrapper.className = 'teaser-content';
 
-  // 4. Group the text rows, so CSS can place image | content side by side.
-  //    Moving elements keeps their editor attributes.
-  const content = document.createElement('div');
-  content.className = 'teaser-content';
-  content.append(...[eyebrowRow, textRow, ctaRow].filter(Boolean));
-  block.append(content);
+  // Title
+  if (title) {
+    const titleEl = document.createElement('h2');
+    titleEl.className = 'teaser-title';
+    titleEl.innerHTML = title;
+    contentWrapper.appendChild(titleEl);
+  }
 
-  // 5. Mark empty rows so CSS can hide them. Never delete them:
-  //    an author may fill them in later.
-  [eyebrowRow, textRow, ctaRow].filter(Boolean).forEach((row) => {
-    if (!row.textContent.trim()) row.classList.add('teaser-empty');
-  });
+  // Subtitle
+  if (subtitle) {
+    const subtitleEl = document.createElement('div');
+    subtitleEl.className = 'teaser-subtitle';
+    subtitleEl.innerHTML = subtitle;
+    contentWrapper.appendChild(subtitleEl);
+  }
+
+  // Description
+  if (description) {
+    const descEl = document.createElement('div');
+    descEl.className = 'teaser-description';
+    descEl.innerHTML = description;
+    contentWrapper.appendChild(descEl);
+  }
+
+  // Primary CTA
+  if (primaryCtaLink && primaryCtaContent) {
+    const cta = document.createElement('a');
+    cta.className = 'teaser-cta teaser-cta--primary';
+    cta.href = primaryCtaLink;
+    cta.innerHTML = primaryCtaContent;
+    contentWrapper.appendChild(cta);
+  }
+
+  // Disclaimer
+  if (disclaimer) {
+    const disclaimerEl = document.createElement('div');
+    disclaimerEl.className = 'teaser-disclaimer';
+    disclaimerEl.innerHTML = disclaimer;
+    contentWrapper.appendChild(disclaimerEl);
+  }
+
+  // Assemble
+  block.innerHTML = '';
+  block.appendChild(imageWrapper);
+  block.appendChild(contentWrapper);
+}
+
+export default function decorate(block, defaultConfig) {
+  const config = defaultConfig || extractConfig(block);
+  buildTeaser(block, config);
 }

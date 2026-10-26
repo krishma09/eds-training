@@ -231,53 +231,122 @@
     "id": "teaser",
     "fields": [
       {
+        "component": "tab",
+        "label": "General",
+        "name": "tab1"
+      },
+      {
+        "component": "text",
+        "name": "id",
+        "label": "ID",
+        "description": "Id for teaser"
+      },
+      {
         "component": "reference",
-        "valueType": "string",
-        "name": "image",
-        "label": "Image",
-        "multi": false
+        "name": "backgroundImage",
+        "label": "Background Image",
+        "description": "Background image for the teaser",
+        "required": true
       },
       {
         "component": "text",
-        "valueType": "string",
-        "name": "imageAlt",
-        "label": "Image alt text"
-      },
-      {
-        "component": "text",
-        "valueType": "string",
-        "name": "eyebrow",
-        "label": "Eyebrow"
+        "name": "backgroundImageAlt",
+        "label": "Background Image Alt",
+        "description": "Alt text for the background image"
       },
       {
         "component": "richtext",
-        "valueType": "string",
-        "name": "text",
-        "label": "Text"
+        "name": "title",
+        "label": "Title",
+        "description": "Main title",
+        "required": true
+      },
+      {
+        "component": "richtext",
+        "name": "subtitle",
+        "label": "Subtitle",
+        "description": "Subtitle"
+      },
+      {
+        "component": "richtext",
+        "name": "description",
+        "label": "Description",
+        "description": "Desc"
+      },
+      {
+        "component": "richtext",
+        "name": "disclaimer",
+        "label": "Disclaimer Text",
+        "description": "disclaimer"
+      },
+      {
+        "component": "richtext",
+        "name": "primaryCtaContent",
+        "label": "Primary CTA Text"
       },
       {
         "component": "aem-content",
-        "name": "link",
-        "label": "CTA link"
+        "name": "primaryCtaLink",
+        "label": "Primary CTA Link"
       },
       {
-        "component": "text",
+        "component": "tab",
+        "label": "Appearance",
+        "name": "tab2"
+      },
+      {
+        "component": "select",
+        "name": "classes_disclaimerPosition",
+        "label": "Disclaimer Position",
         "valueType": "string",
-        "name": "linkText",
-        "label": "CTA label"
-      },
-      {
-        "component": "multiselect",
-        "name": "classes",
-        "label": "Style",
         "options": [
           {
-            "name": "Dark",
-            "value": "dark"
+            "name": "Left",
+            "value": "teaser-disclaimer-left"
           },
           {
-            "name": "Image on right",
-            "value": "image-right"
+            "name": "Right",
+            "value": "teaser-disclaimer-right"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "classes_teaserAlign",
+        "label": "Content Alignment",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Left",
+            "value": "teaser-align-left"
+          },
+          {
+            "name": "Center",
+            "value": "teaser-align-center"
+          },
+          {
+            "name": "Right",
+            "value": "teaser-align-right"
+          }
+        ]
+      },
+      {
+        "component": "select",
+        "name": "classes_teaserTextColor",
+        "label": "Text Color",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Default",
+            "value": "teaser-text-default"
+          },
+          {
+            "name": "Light",
+            "value": "teaser-text-light"
+          },
+          {
+            "name": "Dark",
+            "value": "teaser-text-dark"
           }
         ]
       }
