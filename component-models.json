@@ -192,6 +192,28 @@
     ]
   },
   {
+    "id": "feature",
+    "fields": [
+      {
+        "component": "reference",
+        "name": "Image",
+        "label": "Image"
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "name": "Link",
+        "label": "Link"
+      }
+    ]
+  },
+  {
     "id": "fragment",
     "fields": [
       {
