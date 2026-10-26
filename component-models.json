@@ -210,6 +210,26 @@
         "component": "aem-content",
         "name": "Link",
         "label": "Link"
+      },
+      {
+        "component": "select",
+        "name": "Select",
+        "label": "Select any option",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Opt1",
+            "value": "opt1"
+          },
+          {
+            "name": "Opt2",
+            "value": "opt2"
+          },
+          {
+            "name": "Opt3",
+            "value": "opt3"
+          }
+        ]
       }
     ]
   },
