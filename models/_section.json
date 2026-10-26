@@ -51,7 +51,8 @@
         "cards",
         "columns",
         "fragment",
-        "dummy-text"
+        "dummy-text",
+        "teaser"
       ]
     }
   ]

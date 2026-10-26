@@ -1,0 +1,50 @@
+/* Mobile first: one column by default */
+.teaser {
+	display: grid;
+	gap: 24px;
+	padding: 24px;
+	border-radius: 8px;
+	background: var(--light-color, #f5f5f5);
+}
+
+.teaser .teaser-image img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	border-radius: 8px;
+}
+
+.teaser .teaser-eyebrow {
+	font-size: var(--body-font-size-xs, 14px);
+	font-weight: 600;
+	letter-spacing: 0.02em;
+}
+
+.teaser .teaser-text p {
+	margin: 8px 0;
+}
+
+.teaser .teaser-empty {
+	display: none;
+}
+
+/* Style option: Dark (from the "classes" field) */
+.teaser.dark {
+	background: var(--dark-color, #222);
+	color: #fff;
+}
+
+/* Two columns from 900px */
+@media (width >= 900px) {
+	.teaser {
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+	}
+
+	/* Style option: Image on right */
+	.teaser.image-right .teaser-image {
+		order: 2;
+	}
+}
