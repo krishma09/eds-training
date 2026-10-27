@@ -24,7 +24,7 @@
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text 1",
+          "label": "Text",
           "valueType": "string"
         },
         {
