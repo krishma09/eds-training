@@ -24,8 +24,14 @@
           "component": "richtext",
           "name": "text",
           "value": "",
-          "label": "Text",
+          "label": "Text 1",
           "valueType": "string"
+        },
+        {
+          "component": "reference",
+          "name": "backgroundImage",
+          "label": "Background Image",
+          "description": "Background image for the teaser"
         }
       ]
     }
